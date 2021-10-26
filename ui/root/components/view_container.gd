@@ -38,14 +38,19 @@ func save_all_and_close() -> void:
 		if not _is_quitting:
 			return
 		select_tab(0)
-		close_tab(0)
+		if get_child(0) is EditorView:
+			_on_tab_close_request(0)
+			yield(self, "tab_closed")
+		else:
+			close_tab(0)
 	
 	emit_signal("ready_to_quit")
 
 
 func _save_current_template(close := false) -> void:
 	var view = get_current_tab_content()
-	return
+	if not view is EditorView:
+		return
 	
 	view.save_template()
 	if close:
@@ -55,7 +60,8 @@ func _save_current_template(close := false) -> void:
 
 func _save_all_templates() -> void:
 	for view in get_children():
-		view.save_template()
+		if view is EditorView:
+			view.save_template()
 
 
 func _load_start_view():
