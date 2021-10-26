@@ -81,65 +81,12 @@ func merge_mesh_surfaces(mesh_instances: Array) -> MeshInstance:
 	var colors  = PoolColorArray()
 
 	var material: Material
-
+	var surface_tool : SurfaceTool = SurfaceTool.new()
+	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var array_mesh : ArrayMesh = ArrayMesh.new()
 	for mi in mesh_instances:
-		if not material:
-			material = mi.material_override
-
-		var mesh: Mesh = mi.mesh
-		var surface_count = mesh.get_surface_count()
-
-		for i in surface_count:
-			var arrays = mesh.surface_get_arrays(i)
-			var vert_count = arrays[ArrayMesh.ARRAY_VERTEX].size()
-
-			for j in vert_count:
-				var pos: Vector3 = arrays[ArrayMesh.ARRAY_VERTEX][j]
-				pos = mi.transform.xform(pos)
-				arrays[ArrayMesh.ARRAY_VERTEX][j] = pos
-
-			verts.append_array(arrays[ArrayMesh.ARRAY_VERTEX])
-
-			if arrays[ArrayMesh.ARRAY_INDEX]:
-				var index_count = arrays[ArrayMesh.ARRAY_INDEX].size()
-				for k in index_count:
-					var old_index: int = arrays[ArrayMesh.ARRAY_INDEX][k]
-					arrays[ArrayMesh.ARRAY_INDEX][k] = total_verts + old_index
-				total_verts += vert_count
-				indices.append_array(arrays[ArrayMesh.ARRAY_INDEX])
-
-			if arrays[ArrayMesh.ARRAY_NORMAL]:
-				normals.append_array(arrays[ArrayMesh.ARRAY_NORMAL])
-
-			if arrays[ArrayMesh.ARRAY_COLOR]:
-				colors.append_array(arrays[ArrayMesh.ARRAY_COLOR])
-
-			if arrays[ArrayMesh.ARRAY_TEX_UV]:
-				uvs.append_array(arrays[ArrayMesh.ARRAY_TEX_UV])
-
-			if arrays[ArrayMesh.ARRAY_TEX_UV2]:
-				uv2s.append_array(arrays[ArrayMesh.ARRAY_TEX_UV2])
-
-			if not material:
-				material = mi.get_surface_material(i)
-			if not material:
-				material = mesh.surface_get_material(i)
-
-	var mesh_arrays = Array()
-	mesh_arrays.resize(Mesh.ARRAY_MAX)
-	mesh_arrays[ArrayMesh.ARRAY_VERTEX] = verts
-	if normals: mesh_arrays[ArrayMesh.ARRAY_NORMAL] = normals
-	if indices: mesh_arrays[ArrayMesh.ARRAY_INDEX] = indices
-	if colors:  mesh_arrays[ArrayMesh.ARRAY_COLOR] = colors
-	if uvs:     mesh_arrays[ArrayMesh.ARRAY_TEX_UV] = uvs
-	if uv2s:    mesh_arrays[ArrayMesh.ARRAY_TEX_UV2] = uv2s
-
-	var array_mesh = ArrayMesh.new()
-	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
-
-	if material:
-		array_mesh.surface_set_material(0, material)
-
+		var mesh : Mesh = mi.mesh
+		array_mesh = surface_tool.commit(mesh, mi.transform)
 	var instance = MeshInstance.new()
 	instance.mesh = array_mesh
 	return instance

@@ -634,9 +634,8 @@ limits/websocket_server/max_out_buffer_kb=1024
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=3
 threads/thread_model=2
+quality/subsurface_scattering/quality=0
 quality/filters/msaa=1
 environment/default_environment="res://ui/views/editor/components/viewport/default_env.tres"
-quality/subsurface_scattering/quality=0
