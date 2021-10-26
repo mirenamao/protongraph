@@ -12,7 +12,6 @@ func _init() -> void:
 	description = "Combine all the MeshInstances into a single one"
 
 	set_input(0, "Meshes", DataType.NODE_3D)
-	set_input(1, "Merge surfaces", DataType.BOOLEAN)
 	set_output(0, "", DataType.MESH_3D)
 
 	enable_multiple_connections_on_slot(0)
@@ -20,7 +19,6 @@ func _init() -> void:
 
 func _generate_outputs() -> void:
 	var nodes := get_input(0)
-	var merge_surfaces = get_input_single(1)
 	if not nodes or nodes.size() <= 0:
 		return
 
@@ -31,10 +29,7 @@ func _generate_outputs() -> void:
 	if not mesh_instances or mesh_instances.size() == 0:
 		return
 
-	if merge_surfaces:
-		output[0] = merge_mesh_surfaces(mesh_instances)
-	else:
-		output[0] = merge_mesh_instances(mesh_instances)
+	output[0] = merge_mesh_instances(mesh_instances)
 
 
 func merge_mesh_instances(mesh_instances: Array) -> MeshInstance:
