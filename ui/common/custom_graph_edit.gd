@@ -17,7 +17,6 @@ var undo_redo: UndoRedo
 var _copy_buffer := []
 var _connections_buffer := []
 var _ui_style_ready := false
-var _minimap = preload("res://ui/views/editor/components/minimap/graph_minimap.tscn").instance()
 
 
 func _init() -> void:
@@ -35,9 +34,6 @@ func _init() -> void:
 	Signals.safe_connect(self, "_end_node_move", self, "_on_node_changed")
 	Signals.safe_connect(self, "node_selected", self, "_on_node_selected")
 	Signals.safe_connect(self, "graph_changed", self, "_on_graph_changed")
-
-	_minimap.graph_edit = self
-	call_deferred("add_child", _minimap)
 
 	var scale = EditorUtil.get_editor_scale()
 	snap_distance *= scale
@@ -256,12 +252,11 @@ func _on_disconnection_request(from_node: String, from_slot: int, to_node: Strin
 
 
 func _on_node_selected(_node) -> void:
-	# Make sure the minimap always stays on top
-	_minimap.raise()
+	pass
 
 
 func _on_graph_changed() -> void:
-	_minimap.raise()
+	pass
 
 
 func _on_node_dragged(from: Vector2, to: Vector2, node: GraphNode) -> void:
