@@ -9,7 +9,7 @@ func _init() -> void:
 	description = "Scale nodes from their individual origins"
 
 	set_input(0, "Nodes", DataType.NODE_3D)
-	set_input(1, "Scale", DataType.VECTOR3)
+	set_input(1, "Scale", DataType.VECTOR3, {"value": 1.0})
 	set_output(0, "", DataType.NODE_3D)
 
 	mirror_slots_type(0, 0)

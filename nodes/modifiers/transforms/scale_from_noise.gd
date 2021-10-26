@@ -10,7 +10,7 @@ func _init() -> void:
 
 	set_input(0, "Nodes", DataType.NODE_3D)
 	set_input(1, "Noise", DataType.NOISE)
-	set_input(2, "Amount", DataType.VECTOR3)
+	set_input(2, "Amount", DataType.VECTOR3, {"value": 1.0})
 	set_output(0, "", DataType.NODE_3D)
 
 	mirror_slots_type(0, 0)
