@@ -499,7 +499,7 @@ run/main_scene="res://ui/root/root.tscn"
 boot_splash/image="res://ui/themes/splash.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.1672, 0.17632, 0.19, 1 )
-config/icon="res://ui/icons/icon_proton_graph.svg"
+config/icon="res://ui/icons/icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
 
