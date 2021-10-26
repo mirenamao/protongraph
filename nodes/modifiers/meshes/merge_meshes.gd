@@ -67,20 +67,15 @@ func merge_mesh_instances(mesh_instances: Array) -> MeshInstance:
 
 
 func merge_mesh_surfaces(mesh_instances: Array) -> MeshInstance:
-	var total_verts = 0
-	var verts   = PoolVector3Array()
-	var normals = PoolVector3Array()
-	var indices = PoolIntArray()
-	var uvs     = PoolVector2Array()
-	var uv2s    = PoolVector2Array()
-	var colors  = PoolColorArray()
-
-	var material: Material
 	var surface_tool : SurfaceTool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var array_mesh : ArrayMesh = ArrayMesh.new()
 	for mi in mesh_instances:
-		var mesh : Mesh = mi.mesh
+		var mesh : Mesh = mi.mesh		
+		var override_material : Material = mi.material_override
+		if override_material:
+			for surface_i in mesh.get_surface_count():
+				mesh.surface_set_material(surface_i, override_material)
 		array_mesh = surface_tool.commit(mesh, mi.transform)
 	var instance = MeshInstance.new()
 	instance.mesh = array_mesh
