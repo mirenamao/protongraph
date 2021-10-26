@@ -211,6 +211,7 @@ func create_node(type: String, data := {}, notify := true) -> ProtonNode:
 	new_node.regenerate_default_ui()
 
 	if notify:
+		emit_signal("graph_changed")
 		emit_signal("build_outdated")
 
 	_on_node_created(new_node)
