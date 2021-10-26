@@ -12,7 +12,7 @@ func _init() -> void:
 	set_input(1, "Noise", DataType.NOISE)
 	set_input(2, "Position", DataType.VECTOR3)
 	set_input(3, "Rotation", DataType.VECTOR3)
-	set_input(4, "Scale", DataType.VECTOR3)
+	set_input(4, "Scale", DataType.VECTOR3, {"value": 1.0})
 	set_input(5, "Local Space", DataType.BOOLEAN, {"value": true})
 #	set_input(6, "Snap Angle", DataType.VECTOR3)
 

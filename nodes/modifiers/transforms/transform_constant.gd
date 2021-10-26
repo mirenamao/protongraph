@@ -11,7 +11,7 @@ func _init() -> void:
 	set_input(0, "Nodes", DataType.NODE_3D)
 	set_input(1, "Position", DataType.VECTOR3)
 	set_input(2, "Rotation", DataType.VECTOR3)
-	set_input(3, "Scale", DataType.VECTOR3)
+	set_input(3, "Scale", DataType.VECTOR3, {"value": 1.0})
 	set_input(4, "Local Space", DataType.BOOLEAN, {"value": true})
 	set_output(0, "", DataType.NODE_3D)
 
