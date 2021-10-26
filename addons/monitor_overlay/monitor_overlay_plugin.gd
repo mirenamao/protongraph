@@ -9,7 +9,7 @@ func _enter_tree():
 		"MonitorOverlay", 
 		"VBoxContainer",
 		load("res://addons/monitor_overlay/monitor_overlay.gd"),
-		""
+		load("res://addons/monitor_overlay/icon.svg")
 	)
 
 func _exit_tree():
