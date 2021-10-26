@@ -389,16 +389,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/root/components/view_container.gd"
 }, {
-"base": "Reference",
-"class": "WAT",
-"language": "GDScript",
-"path": "res://addons/WAT/namespace.gd"
-}, {
-"base": "",
-"class": "WATTest",
-"language": "GDScript",
-"path": "res://addons/WAT/core/test/test.gd"
-}, {
 "base": "Control",
 "class": "Warning",
 "language": "GDScript",
@@ -486,8 +476,6 @@ _global_script_class_icons={
 "VectorCurve2D": "",
 "VectorUtil": "",
 "ViewContainer": "",
-"WAT": "",
-"WATTest": "",
 "Warning": "",
 "WelcomeView": ""
 }
@@ -637,6 +625,6 @@ limits/websocket_server/max_out_buffer_kb=1024
 quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=3
 threads/thread_model=2
-quality/subsurface_scattering/quality=0
 quality/filters/msaa=1
 environment/default_environment="res://ui/views/editor/components/viewport/default_env.tres"
+quality/subsurface_scattering/quality=0
