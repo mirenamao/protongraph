@@ -69,16 +69,15 @@ func merge_mesh_instances(mesh_instances: Array) -> MeshInstance:
 func merge_mesh_surfaces(mesh_instances: Array) -> MeshInstance:
 	var surface_tool : SurfaceTool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var array_mesh : ArrayMesh = ArrayMesh.new()
 	for mi in mesh_instances:
 		var mesh : Mesh = mi.mesh		
 		var override_material : Material = mi.material_override
 		if override_material:
 			for surface_i in mesh.get_surface_count():
 				mesh.surface_set_material(surface_i, override_material)
-		array_mesh = surface_tool.commit(mesh, mi.transform)
+				surface_tool.append_from(mesh, surface_i, mi.transform)
 	var instance = MeshInstance.new()
-	instance.mesh = array_mesh
+	instance.mesh = surface_tool.commit()
 	return instance
 
 
